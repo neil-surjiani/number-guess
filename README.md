@@ -1,16 +1,74 @@
-# number_guess
+# 🎯 Number Guessing Game (Flutter)
 
-A new Flutter project.
+A simple and fun **Number Guessing Game** built using **Flutter**.  
+The app generates a random number and challenges the user to guess it, providing instant feedback like **Too High**, **Too Low**, or **Correct!**.
 
-## Getting Started
+This project was built to practice Flutter fundamentals such as:
+- Stateful widgets
+- User input handling
+- Random number generation
+- Navigation between screens
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🎲 Random number generation
+- ⌨️ User input via TextField
+- 📢 Instant feedback (Too High / Too Low / Correct)
+- 🔁 Restart game option
+- 📱 Clean and simple UI
+- 📄 Rules page explaining gameplay
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🛠️ Tech Stack
+
+- **Flutter**
+- **Dart**
+- Material UI
+
+---
+
+## 📂 Project Structure
+
+lib/
+│── main.dart # App entry point
+│── start_page.dart # Start screen
+│── guess.dart # Main game logic
+│── rules.dart # Rules & instructions page
+
+## ▶️ How to Run the App
+
+1. Make sure Flutter is installed  
+   👉 https://docs.flutter.dev/get-started/install
+
+2. Clone the repository:
+   git clone https://github.com/your-username/number-guessing-game.git
+
+Navigate to the project folder:
+cd number-guessing-game
+
+Run the app:
+flutter pub get
+flutter run
+
+🎮 How to Play
+Start the game
+Enter a number in the input field
+Tap Guess   
+Follow the hints until you guess the correct number 🎉
+
+📸 Screenshots (Optional)
+Add screenshots here later to make the repo more attractive
+
+👨‍💻 Author
+Neil Surjiani
+Student | AppDev & ML Enthusiast
+
+⭐ Contributing
+Feel free to fork the repository and improve the app.
+Suggestions and pull requests are welcome!
+
+📜 License
+This project is open-source and free to use for learning purposes.
