@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:number_guess/start_page.dart';
+import 'package:number_guess/mode.dart';
 
 class Rules extends StatelessWidget {
   const Rules({super.key});
@@ -30,7 +31,7 @@ class Rules extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
 
       // Intro line
       Text(
@@ -84,7 +85,26 @@ class Rules extends StatelessWidget {
 
       SizedBox(height: 30),
 
-      // Endi
+      Center(
+      child: Padding(padding: EdgeInsets.only(top: 16),
+           child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 40,
+                  vertical: 14,
+                ),
+              ),
+              onPressed: () async {
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const Mode()));
+              },
+              child: const Text(
+                'Continue',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+            ),
+           ),
+      ),
 
     ],
     )

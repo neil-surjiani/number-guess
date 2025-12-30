@@ -1,22 +1,30 @@
+//Future Improvements
+//Difficulty levels (Easy / Medium / Hard)
+//Timer mode
+//Better animations
+//Dark mode support
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:number_guess/start_page.dart';
+import 'package:number_guess/result_win.dart';
+import 'package:number_guess/result_lose.dart';
 
-class Guess extends StatefulWidget {
-  const Guess({super.key});
+class Attempts_Guess extends StatefulWidget {
+  const Attempts_Guess({super.key});
 
   @override
-  State<Guess> createState() => _NumGuessState();
+  State<Attempts_Guess> createState() => _NumAttempts_GuessState();
 }
 
-class _NumGuessState extends State<Guess> {
+class _NumAttempts_GuessState extends State<Attempts_Guess> {
   final TextEditingController controller = TextEditingController();
 
   Random random = Random(); // Create a Random object
 
   late int rndmno;
 
-  int attempts = 0;
+  int attempts = 10;
 
   @override
   void initState() {
@@ -56,11 +64,11 @@ class _NumGuessState extends State<Guess> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             Padding(
               padding: EdgeInsetsGeometry.only(bottom: 20),
               child: Text(
-                'I’ve picked a number between 1 and 100.\n\n'
-                'Can you guess it ?',
+                'Guess the number?',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 28,
@@ -70,6 +78,24 @@ class _NumGuessState extends State<Guess> {
                 ),
               ),
             ),
+
+            Padding(padding: EdgeInsets.only(bottom: 20),
+          child: Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'Attemps Remaining: $attempts',
+                  style: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.w500,
+                    color: attempts > 3
+                          ? Colors.blue
+                          : Colors.redAccent,
+                  ),
+                ),
+              ),
+            ),
+          ),
 
             TextField(
               controller: controller, // Controls text input
@@ -109,7 +135,7 @@ class _NumGuessState extends State<Guess> {
 
                   if (userip == null) return;
 
-                  attempts++;
+                  attempts--;
 
                   setState(() {
                     if (userip > rndmno) {
@@ -118,14 +144,17 @@ class _NumGuessState extends State<Guess> {
                     if (userip < rndmno) {
                       result = 'Too Less ! Try a higher no.';
                     }
-                    if (userip == rndmno) {
-                      result = 'You Won ! Yaaay!';
-                    }
-
                     attempts;
                   });
 
                   controller.clear();
+
+                  if (userip == rndmno) {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => const Win()));
+                    }
+                  if (attempts == 0) {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => const Lose()));
+                    }
                 },
                 child: const Text(
                   'Check',
@@ -145,24 +174,8 @@ class _NumGuessState extends State<Guess> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 26,
-                      color: result == 'You Won ! Yaaay!'
-                          ? Colors.green
-                          : Colors.redAccent,
+                      color: Colors.red
                     ),
-                  ),
-                ),
-              ),
-            ),
-
-            Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  'You took $attempts attempts...',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.blue,
                   ),
                 ),
               ),

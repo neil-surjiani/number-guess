@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:number_guess/guess.dart';
+import 'package:number_guess/mode.dart';
 import 'package:number_guess/rules.dart';
 
 class NumGuess extends StatefulWidget {
@@ -42,13 +42,16 @@ class _NumGuessState extends State<NumGuess> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            FittedBox(
+                fit: BoxFit.scaleDown,
+                child:Text(
               'Welcome to Number Guess Game', 
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
+            ),
             ),
             
             Padding(padding: EdgeInsets.all(18),
@@ -62,7 +65,7 @@ class _NumGuessState extends State<NumGuess> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context) => const Guess()));
+                Navigator.push(context,MaterialPageRoute(builder: (context) => const Mode()));
               },
               child: const Text(
                 'Play Game 🎮',
