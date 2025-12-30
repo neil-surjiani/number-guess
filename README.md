@@ -53,15 +53,6 @@ Run the app:
 flutter pub get
 flutter run
 
-🎮 How to Play
-Start the game
-Enter a number in the input field
-Tap Guess   
-Follow the hints until you guess the correct number 🎉
-
-📸 Screenshots (Optional)
-Add screenshots here later to make the repo more attractive
-
 👨‍💻 Author
 Neil Surjiani
 Student | AppDev & ML Enthusiast

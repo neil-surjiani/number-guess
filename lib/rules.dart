@@ -70,12 +70,6 @@ class Rules extends StatelessWidget {
       SizedBox(height: 12),
 
       Text(
-        '🔢 Your total number of attempts will be counted.\n',
-        style: TextStyle(fontSize: 20,),
-      ),
-      SizedBox(height: 12),
-
-      Text(
         '🎉 Guess correctly to win and play again!',
         style: TextStyle(
           fontSize: 24,
