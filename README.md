@@ -28,16 +28,6 @@ This project was built to practice Flutter fundamentals such as:
 - **Dart**
 - Material UI
 
----
-
-## 📂 Project Structure
-
-lib/
-│── main.dart # App entry point
-│── start_page.dart # Start screen
-│── guess.dart # Main game logic
-│── rules.dart # Rules & instructions page
-
 ## ▶️ How to Run the App
 
 1. Make sure Flutter is installed  
