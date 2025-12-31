@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:number_guess/mode.dart';
 
 class Win extends StatefulWidget {
-  const Win({super.key});
+  final int correctNumber;
+  const Win({
+    super.key,
+    required this.correctNumber,
+  });
 
   @override
   State<Win> createState() => _WinState();
 }
 
 class _WinState extends State<Win> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +39,7 @@ class _WinState extends State<Win> {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(top: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,7 +50,7 @@ class _WinState extends State<Win> {
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(
-                    'You Won !',
+                    'You Won !\n',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
@@ -55,6 +60,25 @@ class _WinState extends State<Win> {
                 ),
               ),
             ),
+            ),
+
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'The no. was ${widget.correctNumber}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
 
             Center(

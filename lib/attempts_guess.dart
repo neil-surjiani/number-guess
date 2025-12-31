@@ -1,9 +1,7 @@
 //Future Improvements
 //Difficulty levels (Easy / Medium / Hard)
-//Timer mode
 //Better animations
 //Dark mode support
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:number_guess/start_page.dart';
@@ -22,9 +20,9 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
 
   Random random = Random(); // Create a Random object
 
-  late int rndmno;
+  int attempts = 6;
 
-  int attempts = 10;
+    late int rndmno;
 
   @override
   void initState() {
@@ -150,10 +148,10 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
                   controller.clear();
 
                   if (userip == rndmno) {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => const Win()));
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => Win(correctNumber: rndmno)));
                     }
-                  if (attempts == 0) {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => const Lose()));
+                  else if (attempts == 0) {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => Lose(correctNumber: rndmno)));
                     }
                 },
                 child: const Text(

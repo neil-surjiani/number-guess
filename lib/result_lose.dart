@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:number_guess/mode.dart';
+import 'package:number_guess/attempts_guess.dart';
+import 'package:number_guess/timer_guess.dart';
+import 'package:number_guess/blind_guess.dart';
 
 class Lose extends StatefulWidget {
-  const Lose({super.key});
+  final int correctNumber;
+  const Lose({super.key, required this.correctNumber});
 
   @override
   State<Lose> createState() => _LoseState();
@@ -39,44 +43,67 @@ class _LoseState extends State<Lose> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-            child: Padding(
-              padding: EdgeInsets.all(18),
-              child: Center(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'You Lost !',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: Colors.red
+              child: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'You Lost !\n',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-            ),
 
-           Center(
-           child: Padding(padding: EdgeInsets.only(top: 16),
-           child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 14,
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      'The no. was ${widget.correctNumber}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              onPressed: () async {
-                Navigator.push(context,MaterialPageRoute(builder: (context) => const Mode()));
-              },
-              child: const Text(
-                'Play again',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
+
+            Center(
+              child: Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 14,
+                    ),
+                  ),
+                  onPressed: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Mode()),
+                    );
+                  },
+                  child: const Text(
+                    'Play again',
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
               ),
             ),
-           ),
-      ),
           ],
         ),
       ),

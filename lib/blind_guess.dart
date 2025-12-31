@@ -1,61 +1,30 @@
-//Future Improvements
-//Difficulty levels (Easy / Medium / Hard)
-//Timer mode
-//Better animations
-//Dark mode support
-
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:number_guess/start_page.dart';
 import 'package:number_guess/result_win.dart';
 import 'package:number_guess/result_lose.dart';
-import 'dart:async';
 
-class Timer_Guess extends StatefulWidget {
-  const Timer_Guess({super.key});
+class Blind_Guess extends StatefulWidget {
+  const Blind_Guess({super.key});
 
   @override
-  State<Timer_Guess> createState() => _NumTimer_GuessState();
+  State<Blind_Guess> createState() => _NumBlind_GuessState();
 }
 
-class _NumTimer_GuessState extends State<Timer_Guess> {
+class _NumBlind_GuessState extends State<Blind_Guess> {
   final TextEditingController controller = TextEditingController();
 
   Random random = Random(); // Create a Random object
 
-  Timer? timer;
-  int timeLeft = 15;
+  int attempts = 15;
 
     late int rndmno;
-
-  void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (Timer t) {
-      if (timeLeft == 0) {
-        t.cancel();
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => Lose(correctNumber: rndmno)),
-        );
-      } else {
-        setState(() {
-          timeLeft--;
-        });
-      }
-    });
-  }
 
   @override
   void initState() {
     super.initState();
     rndmno = Random().nextInt(100) + 1;
-    startTimer();
   }
-
- @override
- void dispose() {
-   timer?.cancel();
-   controller.dispose();
-   super.dispose();
-  }
-
 
   String result = "";
 
@@ -89,6 +58,7 @@ class _NumTimer_GuessState extends State<Timer_Guess> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+
             Padding(
               padding: EdgeInsetsGeometry.only(bottom: 20),
               child: Text(
@@ -103,22 +73,23 @@ class _NumTimer_GuessState extends State<Timer_Guess> {
               ),
             ),
 
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Center(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    'Time Remaining: ${timeLeft}s',
-                    style: TextStyle(
-                      fontSize: 27,
-                      fontWeight: FontWeight.w500,
-                      color: timeLeft > 5 ? Colors.blue : Colors.redAccent,
-                    ),
+            Padding(padding: EdgeInsets.only(bottom: 20),
+          child: Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  'Attemps Remaining: $attempts',
+                  style: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.w500,
+                    color: attempts > 3
+                          ? Colors.blue
+                          : Colors.redAccent,
                   ),
                 ),
               ),
             ),
+          ),
 
             TextField(
               controller: controller, // Controls text input
@@ -158,24 +129,20 @@ class _NumTimer_GuessState extends State<Timer_Guess> {
 
                   if (userip == null) return;
 
+                  attempts--;
+
                   setState(() {
-                    if (userip > rndmno) {
-                      result = 'Too High ! Try a lower no.';
-                    }
-                    if (userip < rndmno) {
-                      result = 'Too Less ! Try a higher no.';
-                    }
+                    attempts;
                   });
 
                   controller.clear();
 
                   if (userip == rndmno) {
-                    timer?.cancel();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Win(correctNumber: rndmno)),
-                    );
-                  }
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => Win(correctNumber: rndmno)));
+                    }
+                  else if (attempts == 0) {
+                      Navigator.push(context,MaterialPageRoute(builder: (context) => Lose(correctNumber: rndmno)));
+                    }
                 },
                 child: const Text(
                   'Check',
@@ -195,7 +162,7 @@ class _NumTimer_GuessState extends State<Timer_Guess> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 26,
-                      color: Colors.red,
+                      color: Colors.red
                     ),
                   ),
                 ),
