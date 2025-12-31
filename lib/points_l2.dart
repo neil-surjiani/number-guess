@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:number_guess/points_l3.dart';
 import 'dart:math';
 import 'package:number_guess/start_page.dart';
 import 'package:number_guess/result_win.dart';
 import 'package:number_guess/result_lose.dart';
 
-class Attempts_Guess extends StatefulWidget {
-  const Attempts_Guess({super.key});
+class Points_l2 extends StatefulWidget {
+  final int points;
+  const Points_l2({super.key, required this.points});
 
   @override
-  State<Attempts_Guess> createState() => _NumAttempts_GuessState();
+  State<Points_l2> createState() => _NumPoints_l2State();
 }
 
-class _NumAttempts_GuessState extends State<Attempts_Guess> {
+class _NumPoints_l2State extends State<Points_l2> {
   final TextEditingController controller = TextEditingController();
 
   Random random = Random(); // Create a Random object
-
-  int attempts = 6;
-
-    late int rndmno;
+  late int points;
+  late int rndmno;
 
   @override
   void initState() {
     super.initState();
-    rndmno = Random().nextInt(100) + 1;
+    rndmno = Random().nextInt(500) + 1;
+    points = widget.points;
   }
 
   String result = "";
@@ -58,11 +59,11 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-
             Padding(
               padding: EdgeInsetsGeometry.only(bottom: 20),
               child: Text(
-                'Guess the number?',
+                'Guess the number?\n'
+                'Level 2 (1-500)',
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 28,
@@ -73,23 +74,22 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
               ),
             ),
 
-            Padding(padding: EdgeInsets.only(bottom: 20),
-          child: Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  'Attemps Remaining: $attempts',
-                  style: TextStyle(
-                    fontSize: 27,
-                    fontWeight: FontWeight.w500,
-                    color: attempts > 3
-                          ? Colors.blue
-                          : Colors.redAccent,
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Center(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    'Your Points: $points',
+                    style: TextStyle(
+                      fontSize: 27,
+                      fontWeight: FontWeight.w500,
+                      color: points > 30 ? Colors.blue : Colors.redAccent,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
 
             TextField(
               controller: controller, // Controls text input
@@ -129,8 +129,6 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
 
                   if (userip == null) return;
 
-                  attempts--;
-
                   setState(() {
                     if (userip > rndmno) {
                       result = 'Too High ! Try a lower no.';
@@ -138,17 +136,32 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
                     if (userip < rndmno) {
                       result = 'Too Less ! Try a higher no.';
                     }
-                    attempts;
+                    if (userip != rndmno) {
+                      points = points - 10;
+                    }
+                    if (userip == rndmno) {
+                      points = points + 60;
+                    }
+                    points;
                   });
 
                   controller.clear();
 
                   if (userip == rndmno) {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => Win(correctNumber: rndmno)));
-                    }
-                  else if (attempts == 0) {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) => Lose(correctNumber: rndmno)));
-                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Points_l3(points: points),
+                      ),
+                    );
+                  } else if (points == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Lose(correctNumber: rndmno),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   'Check',
@@ -168,7 +181,7 @@ class _NumAttempts_GuessState extends State<Attempts_Guess> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 26,
-                      color: Colors.red
+                      color: Colors.red,
                     ),
                   ),
                 ),

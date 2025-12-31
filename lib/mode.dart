@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:number_guess/blind_guess.dart';
+import 'package:number_guess/prules.dart';
 import 'package:number_guess/start_page.dart';
 import 'package:number_guess/attempts_guess.dart';
 import 'package:number_guess/timer_guess.dart';
+import 'package:number_guess/points_l1.dart';
 
 class Mode extends StatefulWidget {
   const Mode({super.key});
@@ -13,7 +15,7 @@ class Mode extends StatefulWidget {
 
 class _ModeState extends State<Mode> {
 
-  List<String> modes = ['Timer', 'Attempts' , 'Blind (Without hints)'];
+  List<String> modes = ['Timer', 'Attempts' , 'Blind (Without hints)','Points'];
 
   String startmode = 'Timer';
 
@@ -135,6 +137,10 @@ class _ModeState extends State<Mode> {
                 if(startmode == 'Blind (Without hints)')
                 {
                   Navigator.push(context,MaterialPageRoute(builder: (context) => const Blind_Guess()));
+                  }
+                if(startmode == 'Points')
+                {
+                  Navigator.push(context,MaterialPageRoute(builder: (context) => const Prules()));
                   }
               },
               child: const Text(
