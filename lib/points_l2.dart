@@ -140,7 +140,7 @@ class _NumPoints_l2State extends State<Points_l2> {
                       points = points - 10;
                     }
                     if (userip == rndmno) {
-                      points = points + 60;
+                      points = points + 100;
                     }
                     points;
                   });

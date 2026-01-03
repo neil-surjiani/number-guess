@@ -32,7 +32,8 @@ class Prules extends StatelessWidget {
         centerTitle: true,
       ),
 
-      body: Padding(
+      body: SingleChildScrollView(
+        child: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,14 +74,6 @@ class Prules extends StatelessWidget {
               '📊 After each guess, you will get a hint:',
               style: TextStyle(fontSize: 20),
             ),
-            SizedBox(height: 6),
-
-            Text(
-              '• "Too High" → Guess lower\n'
-              '• "Too Low" → Guess higher',
-              style: TextStyle(fontSize: 20),
-            ),
-
             SizedBox(height: 16),
 
             Text(
@@ -140,6 +133,7 @@ class Prules extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }
